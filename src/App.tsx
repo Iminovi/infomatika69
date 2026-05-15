@@ -124,6 +124,24 @@ const TESTIMONIALS: Testimonial[] = [
     role: 'Mahasiswa Tingkat Akhir',
     stars: 4,
   },
+  {
+    quote: "Sangat profesional! Tugas akhir saya yang tadinya stuck berminggu-minggu bisa beres dalam beberapa hari berkat bantuan tim ini.",
+    name: 'Dimas Aditya',
+    role: 'Mahasiswa Sistem Informasi',
+    stars: 5,
+  },
+  {
+    quote: "Harga bersahabat untuk kantong mahasiswa tapi kualitas yang diberikan setara standar industri. Bakal order lagi semester depan!",
+    name: 'Siti Nurhaliza',
+    role: 'Mahasiswa Ilmu Komputer',
+    stars: 5,
+  },
+  {
+    quote: "Bukan cuma dibuatin kode, tapi juga diajarin logikanya sampai bener-bener paham. Mantap banget pelayanannya.",
+    name: 'Kevin Pratama',
+    role: 'Mahasiswa Rekayasa Perangkat Lunak',
+    stars: 5,
+  },
 ];
 
 
@@ -611,6 +629,7 @@ export default function App() {
       <Hero />
       <Services />
       <WhyUs />
+      <Testimonials />
       <HowItWorks />
       <CTA />
       <Footer />
