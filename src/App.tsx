@@ -163,8 +163,8 @@ const Hero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
       {/* Ambient Background Orbs */}
-      <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-blue-900/10 rounded-full blur-[150px] -z-10" />
+      <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px] -z-10 transform-gpu pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-blue-900/10 rounded-full blur-[150px] -z-10 transform-gpu pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
@@ -278,7 +278,7 @@ const Hero = () => {
               </div>
             </motion.div>
 
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-cyan-500/10 rounded-full blur-[100px] -z-10 opacity-30" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-cyan-500/10 rounded-full blur-[100px] -z-10 opacity-30 transform-gpu pointer-events-none" />
           </motion.div>
         </div>
       </div>
@@ -321,7 +321,7 @@ const Services = () => {
 const WhyUs = () => {
   return (
     <section id="why-us" className="py-24 bg-bg-deep overflow-hidden relative">
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-900/10 blur-[120px] rounded-full -translate-x-1/2" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-900/10 blur-[120px] rounded-full -translate-x-1/2 transform-gpu pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-10 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-20">
@@ -423,8 +423,8 @@ const CTA = () => {
     <section className="py-24 px-10 bg-bg-deep">
       <div className="max-w-6xl mx-auto">
         <div className="bg-gradient-to-br from-cyan-600 to-blue-800 rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden shadow-2xl shadow-cyan-500/10 border border-white/5">
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full" />
-          <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[500px] h-[500px] bg-cyan-400/10 blur-[100px] rounded-full" />
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full transform-gpu pointer-events-none" />
+          <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[500px] h-[500px] bg-cyan-400/10 blur-[100px] rounded-full transform-gpu pointer-events-none" />
           
           <h2 className="text-4xl lg:text-6xl font-display font-extrabold text-white mb-8 relative z-10 leading-tight">
             Solusi IT & Tugas, <br/> Sekarang Jadi Mudah.
@@ -523,6 +523,10 @@ const Footer = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    document.documentElement.classList.add('scroll-smooth');
+  }, []);
+
   return (
     <div className="min-h-screen selection:bg-primary-100 selection:text-primary-900">
       <Navbar />
