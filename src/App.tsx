@@ -146,6 +146,27 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
+const PORTFOLIO_ITEMS = [
+  {
+    title: 'Sistem ERP Korporat',
+    category: 'Corporate Solutions',
+    tech: ['React', 'Node.js', 'PostgreSQL'],
+    desc: 'Sistem manajemen terintegrasi untuk perusahaan manufaktur dengan fitur real-time dashboard.',
+  },
+  {
+    title: 'Aplikasi Skripsi Deteksi Penyakit',
+    category: 'Machine Learning',
+    tech: ['Python', 'TensorFlow', 'Flask'],
+    desc: 'Model CNN untuk klasifikasi citra X-Ray paru-paru dengan akurasi 96% untuk tugas akhir.',
+  },
+  {
+    title: 'Mobile App E-Commerce',
+    category: 'Mobile Development',
+    tech: ['Flutter', 'Firebase', 'Stripe'],
+    desc: 'Aplikasi belanja online cross-platform dengan fitur payment gateway dan push notification.',
+  }
+];
+
 
 // --- Components ---
 
@@ -259,7 +280,7 @@ const Hero = () => {
               <a href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-xl shadow-xl shadow-cyan-500/20 transition-all text-center">
                 Mulai Joki Sekarang
               </a>
-              <a href="#services" className="px-10 py-4 bg-slate-800/50 border border-slate-700 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-slate-800 transition-all text-center flex items-center justify-center gap-2">
+              <a href="#portfolio" className="px-10 py-4 bg-slate-800/50 border border-slate-700 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-slate-800 transition-all text-center flex items-center justify-center gap-2">
                 <Briefcase className="w-5 h-5" />
                 Lihat Portfolio
               </a>
@@ -362,6 +383,52 @@ const Services = () => {
               <p className="text-slate-400 leading-relaxed text-sm">
                 {service.description}
               </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Portfolio = () => {
+  return (
+    <section id="portfolio" className="py-24 bg-bg-deep border-b border-slate-800/50">
+      <div className="max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 w-fit mb-4">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Our Works</span>
+          </div>
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white">Project & Portfolio</h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PORTFOLIO_ITEMS.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 group hover:border-cyan-500/50 transition-all flex flex-col h-full"
+            >
+              <div className="aspect-video w-full bg-slate-800 rounded-2xl mb-6 overflow-hidden relative border border-slate-700 group-hover:border-cyan-500/30 transition-all">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                  <Code2 className="w-12 h-12 text-slate-600 group-hover:text-cyan-400 transition-colors" />
+                </div>
+              </div>
+              <div className="mb-6 flex-grow">
+                <span className="text-[10px] font-bold text-cyan-400 mb-3 block tracking-widest uppercase">{item.category}</span>
+                <h4 className="text-xl font-bold text-white mb-3">{item.title}</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {item.tech.map((t, i) => (
+                  <span key={i} className="text-[10px] px-2 py-1 bg-slate-800 text-slate-300 rounded-md border border-slate-700 font-medium">
+                    {t}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -671,6 +738,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <Services />
+      <Portfolio />
       <WhyUs />
       <Testimonials />
       <HowItWorks />
