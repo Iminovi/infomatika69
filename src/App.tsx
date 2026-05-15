@@ -12,6 +12,7 @@ import {
   Layout, 
   CheckCircle2, 
   MessageSquare, 
+  MessageCircle,
   Zap, 
   ShieldCheck, 
   Star, 
@@ -198,7 +199,7 @@ const Navbar = () => {
             <a href="#how-it-works" onClick={() => setIsOpen(false)}>Alur Kerja</a>
             <a href="#why-us" onClick={() => setIsOpen(false)}>Keunggulan</a>
             <a href="#testimonials" onClick={() => setIsOpen(false)}>Testimoni</a>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-slate-900 px-5 py-3 rounded-xl text-center font-bold">
+            <a href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-slate-900 px-5 py-3 rounded-xl text-center font-bold">
               Order Via WhatsApp
             </a>
           </motion.div>
@@ -254,7 +255,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-4"
             >
-              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-xl shadow-xl shadow-cyan-500/20 transition-all text-center">
+              <a href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-xl shadow-xl shadow-cyan-500/20 transition-all text-center">
                 Mulai Joki Sekarang
               </a>
               <button className="px-10 py-4 bg-slate-800/50 border border-slate-700 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-slate-800 transition-all">
@@ -533,7 +534,7 @@ const CTA = () => {
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 px-8 py-4 md:px-12 md:py-6 rounded-2xl font-black text-lg md:text-xl hover:bg-slate-50 transition-all flex items-center gap-4 shadow-xl shadow-slate-900/20"
+              href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 px-8 py-4 md:px-12 md:py-6 rounded-2xl font-black text-lg md:text-xl hover:bg-slate-50 transition-all flex items-center gap-4 shadow-xl shadow-slate-900/20"
             >
               Order Joki Sekarang
               <MessageSquare className="w-5 h-5 md:w-6 md:h-6 fill-slate-900" />
@@ -579,7 +580,7 @@ const Footer = () => {
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all group">
                 <Github size={20} />
               </a>
-              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all">
+              <a href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all">
                 <Smartphone size={20} />
               </a>
             </div>
@@ -618,6 +619,46 @@ const Footer = () => {
   );
 };
 
+const FloatingCTA = () => {
+  const [isNearBottom, setIsNearBottom] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Deteksi jika sisa scroll ke bawah kurang dari 400px (area footer)
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 400;
+      setIsNearBottom(isBottom);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <motion.a
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ delay: 0.5, type: 'spring', stiffness: 200, damping: 20 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      href="https://wa.me/62895385246738"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`fixed right-6 md:right-8 z-[99] bg-gradient-to-r from-emerald-500 to-green-500 text-white p-4 md:px-6 md:py-4 rounded-full shadow-2xl shadow-green-500/40 flex items-center gap-3 hover:shadow-green-500/60 border border-green-400/50 group transition-all duration-500 ${
+        isNearBottom ? 'bottom-28 md:bottom-32' : 'bottom-6 md:bottom-8'
+      }`}
+    >
+      <MessageCircle className="w-6 h-6 md:w-7 md:h-7 fill-white" />
+      <span className="hidden md:block font-bold text-lg tracking-tight">Konsultasi Sekarang</span>
+      
+      {/* Notification dot with pulse animation */}
+      <span className="absolute -top-1 -right-1 flex h-4 w-4">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-slate-900"></span>
+      </span>
+    </motion.a>
+  );
+};
+
 export default function App() {
   useEffect(() => {
     document.documentElement.classList.add('scroll-smooth');
@@ -633,6 +674,7 @@ export default function App() {
       <HowItWorks />
       <CTA />
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }
