@@ -41,6 +41,13 @@ interface Feature {
   icon: React.ElementType;
 }
 
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  stars: number;
+}
+
 // --- Constants ---
 const SERVICES: Service[] = [
   {
@@ -98,6 +105,28 @@ const FEATURES: Feature[] = [
   },
 ];
 
+const TESTIMONIALS: Testimonial[] = [
+  {
+    quote: "Gila, pengerjaannya cepet banget! Kodenya rapi dan dijelasin sampai paham. Nilai A+ di tangan, makasih Informatika 69!",
+    name: 'Ahmad Subagja',
+    role: 'Mahasiswa Teknik Informatika',
+    stars: 5,
+  },
+  {
+    quote: "Sistem CRM untuk startup saya selesai jauh lebih cepat dari ekspektasi. Fiturnya lengkap dan tim sangat responsif. Highly recommended!",
+    name: 'Rina Setiawati',
+    role: 'Founder, Startup Maju',
+    stars: 5,
+  },
+  {
+    quote: "Awalnya ragu, tapi ternyata hasilnya luar biasa. Laporan skripsi saya jadi lebih terstruktur dan analisis datanya tajam. Sangat membantu.",
+    name: 'Budi Santoso',
+    role: 'Mahasiswa Tingkat Akhir',
+    stars: 4,
+  },
+];
+
+
 // --- Components ---
 
 const Navbar = () => {
@@ -127,6 +156,7 @@ const Navbar = () => {
           <a href="#services" className="hover:text-white transition-colors">Layanan</a>
           <a href="#how-it-works" className="hover:text-white transition-colors">Alur Kerja</a>
           <a href="#why-us" className="hover:text-white transition-colors">Keunggulan</a>
+          <a href="#testimonials" className="hover:text-white transition-colors">Testimoni</a>
           <button className="px-5 py-2 bg-slate-800 border border-slate-700 rounded-full text-xs font-bold text-white hover:bg-slate-700 transition-all">
             Cek Pesanan
           </button>
@@ -149,6 +179,7 @@ const Navbar = () => {
             <a href="#services" onClick={() => setIsOpen(false)}>Layanan</a>
             <a href="#how-it-works" onClick={() => setIsOpen(false)}>Alur Kerja</a>
             <a href="#why-us" onClick={() => setIsOpen(false)}>Keunggulan</a>
+            <a href="#testimonials" onClick={() => setIsOpen(false)}>Testimoni</a>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-slate-900 px-5 py-3 rounded-xl text-center font-bold">
               Order Via WhatsApp
             </a>
@@ -380,6 +411,53 @@ const WhyUs = () => {
   );
 };
 
+const Testimonials = () => {
+  return (
+    <section id="testimonials" className="py-24 bg-bg-deep border-t border-slate-800/50">
+      <div className="max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 w-fit mb-4">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Client Stories</span>
+          </div>
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white">Apa Kata Mereka Tentang Kami?</h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-slate-900/40 border border-slate-800 rounded-3xl p-8 flex flex-col h-full"
+            >
+              <div className="flex items-center mb-6">
+                {Array(5).fill(0).map((_, i) => (
+                  <Star 
+                    key={i} 
+                    className={`w-5 h-5 ${i < testimonial.stars ? 'text-yellow-400 fill-yellow-400' : 'text-slate-600'}`} 
+                  />
+                ))}
+              </div>
+              <p className="text-slate-300 italic mb-8 flex-grow">"{testimonial.quote}"</p>
+              <div className="flex items-center gap-4 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center font-bold text-white">
+                  {testimonial.name.charAt(0)}
+                </div>
+                <div>
+                  <h5 className="font-bold text-white">{testimonial.name}</h5>
+                  <p className="text-xs text-slate-500">{testimonial.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const HowItWorks = () => {
   const steps = [
     { title: 'Kirim Detail', desc: 'Detail tugas kirim via WhatsApp.' },
@@ -420,16 +498,16 @@ const HowItWorks = () => {
 
 const CTA = () => {
   return (
-    <section className="py-24 px-10 bg-bg-deep">
+    <section className="py-16 md:py-24 px-5 md:px-10 bg-bg-deep">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-gradient-to-br from-cyan-600 to-blue-800 rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden shadow-2xl shadow-cyan-500/10 border border-white/5">
+        <div className="bg-gradient-to-br from-cyan-600 to-blue-800 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 lg:p-24 text-center relative overflow-hidden shadow-2xl shadow-cyan-500/10 border border-white/5">
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full transform-gpu pointer-events-none" />
           <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[500px] h-[500px] bg-cyan-400/10 blur-[100px] rounded-full transform-gpu pointer-events-none" />
           
-          <h2 className="text-4xl lg:text-6xl font-display font-extrabold text-white mb-8 relative z-10 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-extrabold text-white mb-6 md:mb-8 relative z-10 leading-tight">
             Solusi IT & Tugas, <br/> Sekarang Jadi Mudah.
           </h2>
-          <p className="text-cyan-50 text-lg mb-12 max-w-xl mx-auto relative z-10 leading-relaxed font-medium">
+          <p className="text-cyan-50 text-base md:text-lg mb-10 md:mb-12 max-w-xl mx-auto relative z-10 leading-relaxed font-medium">
             Dari laporan praktikum hingga sistem perusahaan, serahkan pada ahlinya di Informatika 69.
           </p>
           
@@ -437,10 +515,10 @@ const CTA = () => {
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 px-12 py-6 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center gap-4 shadow-xl shadow-slate-900/20"
+              href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 px-8 py-4 md:px-12 md:py-6 rounded-2xl font-black text-lg md:text-xl hover:bg-slate-50 transition-all flex items-center gap-4 shadow-xl shadow-slate-900/20"
             >
               Order Joki Sekarang
-              <MessageSquare className="w-6 h-6 fill-slate-900" />
+              <MessageSquare className="w-5 h-5 md:w-6 md:h-6 fill-slate-900" />
             </motion.a>
           </div>
         </div>
@@ -452,7 +530,7 @@ const CTA = () => {
 const Footer = () => {
   return (
     <footer className="bg-bg-deep pt-32 pb-16 relative border-t border-slate-900">
-      <div className="max-w-7xl mx-auto px-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10">
         {/* Expertise Bar */}
         <div className="flex flex-wrap items-center gap-10 mb-24 px-4 py-8 bg-slate-900/40 border border-slate-800/50 rounded-3xl justify-center lg:justify-start">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 w-full lg:w-fit text-center lg:text-left mb-4 lg:mb-0">Kami Menguasai</span>
@@ -466,7 +544,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-16 mb-20">
+        <div className="grid md:grid-cols-4 gap-10 md:gap-16 mb-20">
           <div className="col-span-2">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded flex items-center justify-center">
@@ -480,10 +558,10 @@ const Footer = () => {
               Platform jasa pengerjaan tugas informatika dengan standarisasi industri. Kami membantu kesuksesan akademik dan skill mahasiswa melalui solusi IT yang matang.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all group">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all group">
                 <Github size={20} />
               </a>
-              <a href="#" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all">
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all">
                 <Smartphone size={20} />
               </a>
             </div>
@@ -492,18 +570,18 @@ const Footer = () => {
           <div>
             <h5 className="font-bold mb-8 text-white uppercase text-xs tracking-widest">Layanan</h5>
             <ul className="space-y-4 text-slate-500 text-sm font-medium">
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Web Development</a></li>
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Mobile Engineering</a></li>
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Machine Learning</a></li>
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Desktop Scripting</a></li>
+              <li><a href="#services" className="hover:text-cyan-400 transition-colors">Web Development</a></li>
+              <li><a href="#services" className="hover:text-cyan-400 transition-colors">Mobile Engineering</a></li>
+              <li><a href="#services" className="hover:text-cyan-400 transition-colors">Machine Learning</a></li>
+              <li><a href="#services" className="hover:text-cyan-400 transition-colors">Desktop Scripting</a></li>
             </ul>
           </div>
           
           <div>
             <h5 className="font-bold mb-8 text-white uppercase text-xs tracking-widest">Informatika 69</h5>
             <ul className="space-y-4 text-slate-500 text-sm font-medium">
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Tentang Kami</a></li>
-              <li><a href="#" className="hover:text-cyan-400 transition-colors">Testimoni</a></li>
+              <li><a href="#why-us" className="hover:text-cyan-400 transition-colors">Tentang Kami</a></li>
+              <li><a href="#testimonials" className="hover:text-cyan-400 transition-colors">Testimoni</a></li>
               <li><a href="#" className="hover:text-cyan-400 transition-colors">Syarat & Layanan</a></li>
               <li><a href="#" className="hover:text-cyan-400 transition-colors">Kebijakan Privasi</a></li>
             </ul>
