@@ -25,7 +25,8 @@ import {
   Lock,
   Clock3,
   FileText,
-  Building2
+  Building2,
+  Briefcase
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -195,7 +196,7 @@ const Navbar = () => {
             className="absolute top-full left-0 right-0 bg-slate-900 border-b border-slate-800 shadow-2xl md:hidden p-6 flex flex-col gap-6 text-sm font-medium"
           >
             <a href="#" onClick={() => setIsOpen(false)}>Beranda</a>
-            <a href="#services" onClick={() => setIsOpen(false)}>Layanan</a>
+            <a href="https://github.com/Iminovi" onClick={() => setIsOpen(false)}>Layanan</a>
             <a href="#how-it-works" onClick={() => setIsOpen(false)}>Alur Kerja</a>
             <a href="#why-us" onClick={() => setIsOpen(false)}>Keunggulan</a>
             <a href="#testimonials" onClick={() => setIsOpen(false)}>Testimoni</a>
@@ -258,9 +259,10 @@ const Hero = () => {
               <a href="https://wa.me/62895385246738" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-xl shadow-xl shadow-cyan-500/20 transition-all text-center">
                 Mulai Joki Sekarang
               </a>
-              <button className="px-10 py-4 bg-slate-800/50 border border-slate-700 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-slate-800 transition-all">
+              <a href="#services" className="px-10 py-4 bg-slate-800/50 border border-slate-700 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-slate-800 transition-all text-center flex items-center justify-center gap-2">
+                <Briefcase className="w-5 h-5" />
                 Lihat Portfolio
-              </button>
+              </a>
             </motion.div>
 
             {/* Stats Grid */}
